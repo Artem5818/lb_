@@ -1,0 +1,7 @@
+import os
+for dirpath, dirnames, filenames in os.walk('/home/stud/Desktop/directories/Directories/lab4_6'): # генератор дерева 
+    for dirname in dirnames:
+        print("Каталог:", os.path.join(dirpath, dirname)) # связывает
+for dirpath, dirnames, filenames in os.walk('/home/stud/Desktop/directories/Directories/lab4_6'):
+    for filename in filenames:
+        print("Файл:", os.path.basename(filename)) # возвращает имя

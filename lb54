@@ -1,0 +1,8 @@
+import random
+import string
+
+def random_filename(length, extension):
+    random_string = ''.join(random.choices(string.ascii_letters, k=length))
+    return f'{random_string}.{extension}'
+filename = random_filename(5, 'cpp')
+print(filename)

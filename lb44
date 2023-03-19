@@ -1,0 +1,10 @@
+import os
+def zadanie_4(dir, files):
+    for file in os.listdir(dir):
+        a=os.path.join(dir, file)
+        if os.path.isdir(a):
+            zadanie_4(a,files)
+        elif os.path.isfile(a):
+                if file.endswith(files):
+                    print(os.path.basename(a))
+zadanie_4('directories/Directories/lab4_6', '.py')

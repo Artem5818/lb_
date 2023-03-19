@@ -1,0 +1,6 @@
+import shutil, os
+def zadanie_1(archivename, unpackdir='/home/stud/Desktop/directories',copydir='/home/stud/Desktop/directories2', mask='*.html'):
+    shutil.unpack_archive(archivename, unpackdir, "zip")
+    shutil.copytree(unpackdir, copydir, ignore=shutil.ignore_patterns(mask), dirs_exist_ok=True)
+    print(os.listdir('/home/stud/Desktop/directories2/Directories/lab4_6/DUDFS'))
+    print(os.listdir('/home/stud/Desktop/directories/Directories/lab4_6/DUDFS'))

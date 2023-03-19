@@ -1,0 +1,18 @@
+import os
+from collections import namedtuple
+def zadanie_3(dir, n=0):
+    a=dir
+    b=dir.split();
+    for file in os.listdir(dir):
+        b1=os.path.join(dir, file)
+        a1=b1.split('/')
+        if len(a1)>len(b):
+            n=n+1
+        elif len(a1)<len(b):
+            n=n-1
+        if os.path.isdir(b1):
+            print(a1[:-1],' '*4*n, a1[-1])
+            a=os.path.join(dir, file)
+            b=a.split('/')
+            zadanie_3(b1, n)
+zadanie_3('directories/Directories/lab4_6')

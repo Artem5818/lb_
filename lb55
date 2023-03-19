@@ -1,0 +1,20 @@
+import secrets
+import string
+
+class Password:
+    def __init__(self, *sets):
+        if not sets:
+            raise ValueError('')
+        self.sets = sets
+
+    def generate(self, length):
+        password = ''
+        while len(password) < length:
+            set_ = secrets.choice(self.sets)
+            char = secrets.choice(set_)
+            password += char
+        return password
+
+
+password_generator = Password(string.ascii_lowercase, string.ascii_uppercase, string.digits)
+print(password_generator.generate(5))

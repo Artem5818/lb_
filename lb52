@@ -1,0 +1,20 @@
+import random
+class Dice:
+    def __init__(self, num_sides=6, num_dice=1):
+        self.num_sides = num_sides
+        self.num_dice = num_dice
+        
+    def inp(self):
+        self.num_sides = int(input ('Введите число граней: '))
+        self.num_dice = int(input ('Введите число кубиков: '))
+
+    def roll(self, seed = None):
+        result = []
+        random.seed(a = seed)
+        for i in range(self.num_dice):
+            result.append(random.randint(1, self.num_sides))
+        return result
+
+cub = Dice()
+cub.inp()
+print(cub.roll(999), cub.roll(999))

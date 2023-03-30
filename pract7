@@ -1,0 +1,117 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <random>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+class card
+{
+private:
+	string n;
+	string s;
+	string nam[9]= {"6","7","8","9","10","Валет","Дaма","Koроль","Туз"};
+	string suits[4]= {"Крести","Пики","Черви","Буби"};
+public:
+	card()
+	{
+		n="";
+		s="";
+	}
+	card(string x, string y)
+	{
+		n=x;
+		s=y;
+	}
+	void comp();
+	void shake();
+	void full();
+	void color();
+	void naminal();
+	void QS();
+	void Ace();
+	friend ostream& operator<<(ostream& out, const card& c)
+	{
+		return out<<c.n<<":"<<c.s<<endl;
+	}
+	vector<card> k;
+};
+void card::comp()
+{
+	for (int j=0; j<4; j++) {
+		for (int i=0; i<9; i++) {
+			string mast=nam[i];
+			string nominal=suits[j];
+			card a(nominal,mast);
+			k.push_back(a);
+		}
+	}
+}
+void card::full()
+{
+	cout<<"Исходная колода карт:"<<endl;
+	for(int i=0; i<36; i++) {
+		cout<<"Kaрта №: "<<i+1<<" "<<k[i];
+	}
+}
+void card::shake()
+{
+	cout<<"Перемешанная колода:"<<endl;
+	random_device rndom;
+	srand(rndom());
+	random_shuffle(k.begin(), k.end());
+	for(int i=0; i<36; i++) {
+		cout<<"Kaрта №: "<<i+1<<" "<<k[i];
+	}
+}
+void card::color()
+{
+	cout<<"По цвету:"<<endl;
+	for(int i=0; i<35; i++) {
+		if (( (k[i].n==k[i+1].n)||((k[i+1].n=="Крести")&&(k[i].n=="Пики"))
+		      ||((k[i+1].n=="Пики")&&(k[i].n=="Крести"))) ||
+		    ((k[i+1].n=="Черви")&&(k[i].n=="Буби")) ||
+		    ((k[i+1].n=="Буби")&&(k[i].n=="Черви"))) {
+			cout<<"Kaрта №: "<<i+1<<" и Kaрта №: "<<i+2<<"-Oдинакового цвета"<<endl;
+		}
+	}
+}
+void card::naminal()
+{
+	cout<<"По значению:"<<endl;
+	for(int i=0; i<35; i++) {
+		if (k[i].s==k[i+1].s) {
+			cout<<"Kaрта №: "<<i+1<<" и Kaрта №: "<<i+2<<" -Oдинаковое значение"<<endl;
+		}
+	}
+}
+void card::QS()
+{
+	cout<<"Нахождение карты:"<<endl;
+	for(int i=0; i<36; i++) {
+		if ((k[i].s=="Дама")&&(k[i].n=="Пики")) {
+			cout<<"Kaрта №:"<<i+1<<" - Дама пики"<<endl;
+		}
+	}
+}
+void card::Ace()
+{
+	cout<<"Поиск тузов:"<<endl;
+	for(int i=0; i<36; i++) {
+		if (k[i].s=="Туз") {
+			cout<<"Kaрта №: "<<i+1<<" - Tуз"<<endl;
+		}
+	}
+}
+int main()
+{
+	card a;
+	a.comp();
+	a.shake();
+	a.full();
+	a.color();
+	a.naminal();
+	a.QS();
+	a.Ace();
+	return 0;
+}
